@@ -1,4 +1,4 @@
-A line of people at an amusement park ride.
+1. A line of people at an amusement park ride.
 
 The line is composed of members, represented as strings.
 There is a front to the line, as well as a back.
@@ -7,17 +7,56 @@ People may leave the line whenever they see fit, and those behind them take thei
 Given the above real-world information, use an array data structure to code the following solution.
 
 a) Use an array input: ["Vivian", "Ava", "Josh", "Patrick", "Mike"]
+
+var members = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
+
+
 b) Insert a new person, "Mary" at the end of the line. In other words, you should insert Mary after Mike.
+
+function addPerson(name) {
+  members.push(name);
+}
+
 c) Find a person in line named "Josh." This function should return the position of 2 in the array, (recall that arrays are 0-based).
+
+
 d) Find a person in line named "Emily." What should your function return if it does not find the item in the array?
+
+function findPerson(name) {
+  results = members.indexOf(name);
+  if (results === -1) {
+    return "Sorry " + name + " is not in line!";
+  } else return name + "'s" + " number in line is " + results + "!";
+}
+
 e) What if Ava wants to allow a friend, "Melissa", to cut in line in front of her? How would you code this so Melissa appears before Ava?
+
+function skipLine(num, name) {
+  var remove = 0;
+  members.splice(num, remove, name);
+  return members.join(", ");
+}
+
 f) If Patrick wants to leave the line, how would you delete him from the array?
 
-Provide another real-world example that you can model using a data structure.
+function leaveLine(name) {
+  let arr = members;
+  for (var i = 0; i <= arr.length; i++) {
+    if (arr[i] === name) {
+      arr.splice(i, 1);
+      return members.join(", ");
+    }
+  }
 
-How would your data structure allow developers to access and manipulate the data?
+2. Provide another real-world example that you can model using a data structure.
+
+We can use data structure to manage store inventory by using Queue type data structure with event queues listeners and event loops.
+
+3. How would your data structure allow developers to access and manipulate the data?
+
+The Queue data structure can be managed easily since it follows FIFO protocol (First In, First Out) with .push and .shift operations. By using clear function names and declaration and following clear code guidence will make other developers to easily access and maintain the data structure.
 
 
 
 
-members = ["Vivian", "Ava", "Josh", "Patrick", "Mike"]
+
