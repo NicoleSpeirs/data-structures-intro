@@ -1,0 +1,15 @@
+1. What is the main difference between a stack and a queue?
+
+The stack implements the LIFO ( last-in-first-out) priority collection while queue implements the FIFO (first-in-first-out) priority collection.
+
+
+2. What are the similarities between stacks and queues?
+
+Both data structures are unable to implement middle element manipulation. Stack can manipulate the last elements and queue can manipulate the first elements, but since there are no indexes available they can’t remove or add elements in the middle of queue or stack.
+
+
+3. Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
+
+The stack data structure would be an appropriate option to implement UNDO and REDO option since it provides the push and pop functions that add and remove elements that have been last added.
+
+
