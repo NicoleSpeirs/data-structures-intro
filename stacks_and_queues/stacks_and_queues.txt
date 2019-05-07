@@ -12,4 +12,88 @@ Both data structures are unable to implement middle element manipulation. Stack 
 
 The stack data structure would be an appropriate option to implement UNDO and REDO option since it provides the push and pop functions that add and remove elements that have been last added.
 
+******Programming Questions*******
 
+1. Given a string, reverse it using a stack. For example, the string "Bloc!"should be converted to "!colB".
+
+FUNCTION REVERSE(Word)
+  INIT a new stack
+  FOR each character in original
+    CALL stack.push WITH character
+  END FOR
+  INIT reversed to empty string
+  WHILE stack is not empty
+    CALL stack.pop RETURNING character
+    APPEND character to reverseWord
+  END WHILE
+  RETURN reverseWord
+END FUNCTION
+
+var letters = [];
+var reverseWord = "";
+
+function reverse(word) {
+  for( var i = 0; i < word.length; i++){
+    letters.push(word[i]);
+  }
+  for (var i=0; i < word.length; i++){
+  reverseWord += letters.pop(word[i]);
+  }
+  return reverseWord;
+}
+
+
+console.log(reverse("Bloc!"));
+
+2.Implement the pop method of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure. Since the internal list is not the same as defined in the checkpoint, it may help to rewrite the pseudocode first.
+
+class Stack extends Array{
+  pop(){
+    var newQueue = [];
+    var removedItems = [];
+    for(var i = 0; i < this.length; i++){
+      if(i == this.length -1){
+        removedItems.push(this[i]);
+      } else{
+        newQueue.push(this[i]);
+      }
+    }
+  return removedItems;
+  }
+}
+
+
+
+
+let array = new Stack(1,2,3,4);
+console.log(array.pop());
+
+
+
+1.Implement the enqueue and dequeue methods defined in the checkpoint inside your own Queue class.
+
+class Queue {
+  constructor (){
+     this.elements = [];
+  }
+
+   enqueue(element){
+    this.elements.push(element);
+  }
+
+   dequeue(){
+   return this.elements.shift();
+  }
+
+}
+
+var queue = new Queue();
+queue.enqueue(5)
+queue.enqueue(4)
+queue.enqueue(3)
+
+console.log(queue.elements);
+
+queue.dequeue();
+
+console.log(queue.elements);
