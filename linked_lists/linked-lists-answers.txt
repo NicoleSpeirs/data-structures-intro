@@ -1,0 +1,248 @@
+1. What are some pros and cons of using linked lists instead of arrays?
+pros: arrays have fixed number of elements while linked lists able to add unlimited number of elements. While we can add new elements to an existing array, it is much expensive.
+cons: we cannot randomly access an element in linked lists nut we can do so in array by its index.
+
+2. Come up with a real world example of a linked list.
+ a line or an elevetor are examples of linked list.
+
+
+***** Programming Questions *****
+
+1. The linked list push function should take a value, create a node, and add it to the end of a list. Below is pseudocode for a push function for a singly linked list. However, there is something wrong with it. Submit both an explanation of the bug and a functional implementation of the method.
+
+FUNCTION push(element)
+CREATE node
+SET node.value TO element
+SET node.next TO null
+
+IF the head node does not exist
+ THEN SET head to node
+ELSE
+ SET current to head
+ SET current.next to node
+END IF
+END FUNCTION
+
+"SET current to head" always sets the head.next to the most recently pushed node. This overwrites the head.next value each time a push is made, overwriting the previous push.
+
+IF !head
+  SET current and head to node
+ELSE
+  SET current.next to node
+  SET current to node
+
+
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.current = null;
+  }
+
+
+  push(element) {
+    const node = new Node(element);
+
+
+    if (!this.head) {
+      this.head = node;
+      this.current = node;
+    } else {
+      this.current.next = node;
+      this.current = node;
+    }
+  }
+}
+
+
+class Node {
+  constructor(element) {
+    this.value = element;
+    this.next = null;
+  }
+}
+
+
+let linkedList = new LinkedList();
+console.log(linkedList);
+linkedList.push("Toby");
+linkedList.push("Zoe");
+linkedList.push("Charlie");
+linkedList.push("Benji");
+
+
+
+
+
+2. Given an unsorted singly linked list, remove all duplicates from the linked list.
+Example
+Input: a -> c -> d -> d -> a
+Output: a -> c -> d
+
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.current = null;
+    this.size = 0;
+  }
+
+
+  push(element) {
+    const node = new Node(element);
+
+    if (!this.head) {
+      this.head = node;
+      this.current = node;
+    } else {
+      this.current.next = node;
+      this.current = node;
+    }
+
+    this.size++
+  }
+
+  removeDuplicates() {
+    let prevNode = null;
+    let currentNode = this.head;
+    let dupes = {}
+
+    while (currentNode != null) {
+      if (dupes[currentNode.value]){
+        prevNode.next = currentNode.next;
+        this.size--
+        console.log(`Dupe Found! removing ${currentNode.value}`)
+      } else {
+        dupes[currentNode.value] = true
+       // sets the current nodes value as key and true as value
+        console.log(`no dupe found, inserting ${currentNode.value} into the dupes object.`)
+      }
+      prevNode = currentNode;
+      currentNode = currentNode.next
+      console.log(dupes);
+    }
+    return this.head;
+  }
+}
+
+
+class Node {
+  constructor(element) {
+    this.value = element;
+    this.next = null;
+  }
+}
+
+
+let linkedList = new LinkedList();
+console.log(linkedList);
+linkedList.push("a");
+linkedList.push("c");
+linkedList.push("d");
+linkedList.push("d");
+linkedList.push("e");
+linkedList.removeDuplicates();
+linkedList.head.next.next.next.value === "e" // should be true
+
+
+3.Given an unsorted singly linked list, reverse it.
+Example
+Input: a -> b -> c -> d
+Output: d -> c -> b -> a
+
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.current = null;
+    this.size = 0;
+  }
+
+
+  push(element) {
+    const node = new Node(element);
+
+    if (!this.head) {
+      this.head = node;
+      this.current = node;
+    } else {
+      this.current.next = node;
+      this.current = node;
+    }
+
+    this.size++
+  }
+
+  removeDuplicates() {
+    let prevNode = null;
+    let currentNode = this.head;
+    let dupes = {}
+
+    while (currentNode != null) {
+      if (dupes[currentNode.value]){
+        prevNode.next = currentNode.next;
+        this.size--
+      } else {
+        dupes[currentNode.value] = true
+        }
+      prevNode = currentNode;
+      currentNode = currentNode.next
+    }
+    return this.head;
+  }
+
+  reverse() {
+    let newCurrent = this.head;
+    let prevNode = null;
+    let currentNode = this.head;
+    let nextNode;
+
+    while (currentNode) {
+      nextNode = currentNode.next;
+      currentNode.next = prevNode;
+      prevNode = currentNode;
+      currentNode = nextNode;
+    }
+
+    this.head = prevNode;
+    this.current = newCurrent;
+  }
+
+  print() {
+    let currentNode = this.head;
+    let list = []
+    while(currentNode){
+      list.push(currentNode.value);
+      currentNode = currentNode.next
+    }
+    list.push('null');
+    return list.join(' -> ')
+  }
+}
+
+
+class Node {
+  constructor(element) {
+    this.value = element;
+    this.next = null;
+  }
+}
+
+let linkedList = new LinkedList();
+console.log(linkedList);
+linkedList.push("1");
+console.log(linkedList.print())
+linkedList.push("2");
+console.log(linkedList.print())
+linkedList.push("3");
+console.log(linkedList.print())
+linkedList.push("4");
+console.log(linkedList.print())
+linkedList.push("4");
+console.log(linkedList.print())
+linkedList.push("5");
+console.log(linkedList.print())
+linkedList.removeDuplicates()
+console.log(linkedList.print())
+linkedList.reverse();
+console.log(linkedList.print())
