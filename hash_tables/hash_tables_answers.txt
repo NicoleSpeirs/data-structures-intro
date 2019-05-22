@@ -1,0 +1,95 @@
+1. What is a hash table?
+Hash table is a type of data structure that stores each value by linking it to a unique key and creates a key-value pairs.
+
+2. What is hashing?
+Hashing is the process of conversion of data into a hash using a hashing function.
+
+3. How does a hash table store data?
+  1. Take the key.
+  2. Convert the key to a hash code using a hashing function.
+  3. Modify the hash code to get an array index.
+  4. Store the value in the array index.
+
+4. How are hash tables and objects different?
+Hash tables stores a collection of similar data with identifier,while objects can hold different types of data that are tied to property name.
+
+5. Determine whether you would use a hash table or an object to store each of the following pieces of data:
+    * A list of pets and their unique names.
+    Hash Table
+    * The name, age, and the birthday of your best friend.
+    Object
+    * The name and location of every company in a given city.
+    Hash Table
+    * All of the books checked out from a library by a particular individual.
+    Hash Table
+    * The primary and secondary phone numbers for a contact.
+    Object
+
+
+****Programming Questions****
+
+1. Create a hash table that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers.
+
+var hash = (key, max) => {
+  var hash = 0;
+  for (var i = 0; i < key.length; i++) {
+    hash += key.charCodeAt(i);
+  }
+  return hash % max;
+};
+
+class HashTable {
+  constructor() {
+    this.storage = [];
+    this.storageLimit = 15;
+  }
+
+  print() {
+    console.log(this.storage);
+  }
+
+  add(key, value) {
+    const {storage, storageLimit} = this;
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      storage[index] = [[key, value]];
+    } else {
+      var inserted = false;
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          storage[index][i][1] = value;
+          inserted = true;
+        }
+      }
+      if (inserted === false) {
+        storage[index].push([key, value]);
+      }
+    }
+  }
+
+  find(key) {
+    const {storage, storageLimit} = this;
+    var index = hash(key, storageLimit);
+    if(storage[index] === undefined) {
+      return undefined;
+    } else {
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          return storage[index][i][1];
+        }
+      }
+    }
+  }
+
+}
+
+let ht = new HashTable();
+ht.print();
+// console.log(hash("name", 4));
+ht.add("123-456-7890", ["Richard", "123 main st", "123-456-7890"]);
+ht.add("0987-765-4321", ["Zoe", "888 dog st","0987-765-4321"]);
+ht.print();
+console.log(ht.find("0987-765-4321"));
+
+
+
