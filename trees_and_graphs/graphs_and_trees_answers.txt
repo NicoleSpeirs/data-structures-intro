@@ -10,7 +10,7 @@ Heuristics are guesses that an algorithm makes to solve complex problems by gett
 
 3. What is another problem besides the shortest-path problem that requires the use of heuristics?
 
-Google search results can narrow down the results for someone's search based on word associations. For exapmle when a person types “Raspberry Pi” in google search, the algorithm will not be returning fruit pictures and “Raspberry Pie” recipes in search results.
+The traveling salesman problem.
 
 
 4. What is the difference between a depth-first search and a breadth-first search?
@@ -20,7 +20,11 @@ Breadth -first searches multiple nodes at once by searching an entire row of nod
 
 5. Explain in your own words what an undirected, a-cyclic, unweighted graph is.
 
-Undirected, a-cyclic, unweighted graph is a graph that has a two way connection that does not have an end or star as well as assigned cost or travel.
+Undirected graph - has a two way connection that does not have an end or start.
+
+A-cyclic graph - are graphs that do not form loops (such as linked lists and trees).
+
+Unweighted graph - is a graph that does not have assigned cost or travel time.
 
 
 6. What kind of graph is a binary search tree?
@@ -32,6 +36,17 @@ Binary tree is directed, a - cyclic, unweighted type of graph.
 1. Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
 
 Example: The value 10 exists in the tree. The value 23 does not exist in the tree.
+
+SET current data TO root node
+ FUNCTION find()
+ Implement a WHILE loop current.data !== data
+  IF data < current.data
+    current = current.left
+ ELSE
+    current = current.right
+ IF current = null
+    RETURN FALSE
+ END FUNCTION
 
 class Node {
   constructor(data, left = null, right = null) {
@@ -107,6 +122,11 @@ console.log(bst.find(8));
 2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
 
 Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
+
+Find the lowest common ancestor
+Get the distance from the lowest common ancestor to n1
+Get the distance from the lowest common ancestor to n2
+return the combined distance
 
 getCommonAncestor(n1, n2) {
     let current = this.root;
