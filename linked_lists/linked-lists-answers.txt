@@ -110,20 +110,29 @@ class LinkedList {
     while (currentNode != null) {
       if (dupes[currentNode.value]){
         prevNode.next = currentNode.next;
+        currentNode = prevNode.next;
         this.size--
-        console.log(`Dupe Found! removing ${currentNode.value}`)
       } else {
         dupes[currentNode.value] = true
-       // sets the current nodes value as key and true as value
-        console.log(`no dupe found, inserting ${currentNode.value} into the dupes object.`)
+        prevNode = currentNode;
+        currentNode = currentNode.next
+        console.log(dupes);
       }
-      prevNode = currentNode;
-      currentNode = currentNode.next
-      console.log(dupes);
     }
     return this.head;
   }
-}
+
+   print() {
+    let currentNode = this.head;
+    let list = []
+    while(currentNode){
+      list.push(currentNode.value);
+      currentNode = currentNode.next
+    }
+    list.push('null');
+    return list.join(' -> ')
+    }
+  }
 
 
 class Node {
@@ -136,13 +145,16 @@ class Node {
 
 let linkedList = new LinkedList();
 console.log(linkedList);
-linkedList.push("a");
-linkedList.push("c");
-linkedList.push("d");
-linkedList.push("d");
-linkedList.push("e");
+linkedList.push(1);
+linkedList.push(1);
+linkedList.push(2);
+linkedList.push(1);
+linkedList.push(2);
+linkedList.push(3);
+linkedList.push(1);
 linkedList.removeDuplicates();
-linkedList.head.next.next.next.value === "e" // should be true
+linkedList.print();
+
 
 
 3.Given an unsorted singly linked list, reverse it.
